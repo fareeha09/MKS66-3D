@@ -1,6 +1,6 @@
 #test box mesh
 box
-0 0 0 200 100 400
+100 100 0 200 100 400
 ident
 rotate
 x 20
@@ -8,5 +8,9 @@ rotate
 y 20
 move
 150 200 0
+#clear the edge matrix, test the sphere
+sphere
+100 100 0 200
 apply
-display
+save
+pic.png

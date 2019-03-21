@@ -16,9 +16,11 @@ def add_box( points, x, y, z, width, height, depth ):
     add_edge( points, x+width, y, z-depth, x + width, y, z)
     add_edge( points, x, y, z, x, y, z-depth)
     add_edge( points, x, y, z-depth, x, y-height, z-depth)
+    add_edge( points, x, y-height, z-depth, x + width, y-height, z-depth)
+    add_edge( points, x + width, y-height, z-depth, x+width, y, z-depth)
+    add_edge( points, x + width, y-height, z-depth, x+width, y-height, z)
 
 
-'''
   # ====================
   # Generates all the points along the surface
   # of a sphere with center (cx, cy, cz) and
@@ -26,7 +28,16 @@ def add_box( points, x, y, z, width, height, depth ):
   # Returns a matrix of those points
   # ====================
 def generate_sphere( points, cx, cy, cz, r, step ):
-    m = new_matrix()
+    for i in range(step):
+        phi = 2 * i * math.pi / step
+        for j in range(step):
+            theta = math.pi * j / step
+            x = r * math.cos(theta) + cx
+            y = r * math.sin(theta) * math.cos(phi) + cy
+            z = r * math.sin(theta) * math.sin(phi) + cz
+            add_point(points, x, y, z)
+
+	return points
 
 
   # ====================
@@ -36,9 +47,15 @@ def generate_sphere( points, cx, cy, cz, r, step ):
   # necessary points
   # ====================
 def add_sphere( points, cx, cy, cz, r, step ):
-    pass
-
-
+    generate_sphere(points, cx, cy, cz, r, step)
+    i = 0
+    print len(points)
+    while(i <= len(points)):
+        add_edge(points, points[i][0], points[i][1], points[i][2], points[i+1][0], points[i+1][1], points[i+1][2])
+        i+=1
+  
+	
+'''
   # ====================
   # Generates all the points along the surface
   # of a torus with center (cx, cy, cz) and
