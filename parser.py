@@ -124,7 +124,10 @@ def parse_file( fname, edges, transform, screen, color ):
         elif line == 'sphere':
             add_sphere( edges, float(args[0]), float(args[1]), float(args[2]), float(args[3]), 20 )
 
-        elif line == 'display' or line == 'save':
+        elif line == 'torus':
+            add_torus( edges, float(args[0]), float(args[1]), float(args[2]), float(args[3]), float(args[4]), 20)
+
+	elif line == 'display' or line == 'save':
             clear_screen(screen)
             draw_lines(edges, screen, color)
 
@@ -132,6 +135,3 @@ def parse_file( fname, edges, transform, screen, color ):
                 display(screen)
             else:
                 save_extension(screen, args[0])
-        elif line == 'torus':
-            add_torus( edges, float(args[0]), float(args[1]), float(args[2]), float(args[3]), float(args[4]), 20)
-
