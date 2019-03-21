@@ -47,13 +47,15 @@ def generate_sphere( points, cx, cy, cz, r, step ):
   # necessary points
   # ====================
 def add_sphere( points, cx, cy, cz, r, step ):
-    generate_sphere(points, cx, cy, cz, r, step)
-    i = 0
-    print len(points)
+    m = generate_sphere(points, cx, cy, cz, r, step)
+    for i in m:
+        add_edge(points, i[0], i[1], i[2], i[0]+1, i[1]+1, i[2]+1)
+'''print len(points)
+    i=0
     while(i <= len(points)):
         add_edge(points, points[i][0], points[i][1], points[i][2], points[i+1][0], points[i+1][1], points[i+1][2])
         i+=1
-  
+  '''
 	
 '''
   # ====================
